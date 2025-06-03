@@ -11,14 +11,6 @@ class Animal {
 
   updateHealth(amount) {
     this.health += amount;
-
-    if (this.health <= 0) {
-      this.die();
-    }
-  }
-
-  die() {
-    Animal.alive = Animal.alive.filter((animal) => animal !== this);
   }
 }
 
@@ -37,6 +29,8 @@ class Carnivore extends Animal {
   bite(target) {
     if (target instanceof Herbivore && target.hidden !== true) {
       target.updateHealth(-50);
+
+      Animal.alive = Animal.alive.filter((animal) => animal.health > 0);
     }
   }
 }
